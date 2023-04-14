@@ -105,3 +105,4 @@ dist
 
 # random stuff
 .DS_Store
+.vscode/
