@@ -8,8 +8,8 @@ const Home = () => {
     <main className={styles.main}>
       <Header />
       <div className={styles.contentContainer}>
-        <Feed />
         <Sidebar />
+        <Feed />
       </div>
     </main>
   );

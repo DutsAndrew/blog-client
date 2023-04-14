@@ -1,8 +1,12 @@
+import styles from '../page.module.css';
+
 const Sidebar = () => {
   return (
-    <p>
-      Sidebar
-    </p>
+    <section className={styles.sidebarContainer}>
+      <p>
+        Sidebar
+      </p>
+    </section>
   );
 };
 
