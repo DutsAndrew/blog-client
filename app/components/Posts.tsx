@@ -1,8 +1,12 @@
+import styles from '../page.module.css';
+
 const Posts = () => {
   return (
-    <p>
-      Posts
+   <section className={styles.postsContainer}>
+     <p>
+        Posts
     </p>
+   </section>
   );
 };
 
