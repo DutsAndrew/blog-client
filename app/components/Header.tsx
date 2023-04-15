@@ -1,10 +1,18 @@
 import styles from '../page.module.css';
-import AccountDropDown from './AccountDropDown';
 import Icon from '@mdi/react';
 import { mdiPyramid } from '@mdi/js';
+import { FC } from 'react';
+import { HeaderProps } from '@/types/interfaces';
 // pyramid.svg as backup in public folder
 
-const Header = () => {
+const Header: FC<HeaderProps> = (props) => {
+
+  const { requestAccountView } = props;
+
+  const handleAccountRequest = () => {
+    requestAccountView();
+  };
+
   return (
     <nav className={styles.navContainer}>
       <div className={styles.headerLeftContainer}>
@@ -35,7 +43,8 @@ const Header = () => {
         </button>
         <img 
           className={styles.accountImg}
-          src='/shield-account.svg'>
+          src='/shield-account.svg'
+          onClick={() => handleAccountRequest()}>
         </img>
       </div>
     </nav>
