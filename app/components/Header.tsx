@@ -1,9 +1,10 @@
+'use client';
+
 import styles from '../page.module.css';
 import Icon from '@mdi/react';
 import { mdiPyramid } from '@mdi/js';
 import { FC } from 'react';
 import { HeaderProps } from '@/types/interfaces';
-// pyramid.svg as backup in public folder
 
 const Header: FC<HeaderProps> = (props) => {
 
@@ -17,7 +18,7 @@ const Header: FC<HeaderProps> = (props) => {
     <nav className={styles.navContainer}>
       <div className={styles.headerLeftContainer}>
         <Icon path={mdiPyramid}
-            title="Blog Logo"
+            title="Logo"
             size={2}
             rotate={40}
             color="#FFA500"

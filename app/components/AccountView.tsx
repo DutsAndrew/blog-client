@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import styles from '../page.module.css';
 import { AccountViewProps } from '@/types/interfaces';

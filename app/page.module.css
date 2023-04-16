@@ -155,3 +155,24 @@
 .accountImg:hover {
   cursor: pointer;
 }
+
+/* POSTS COMPONENT */
+
+.postContainer {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  min-height: 10vh;
+  max-height: 30vh;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  overflow: hidden;
+  gap: 4vw;
+}
+
+.postContainer:hover {
+  background-color: yellow;
+  transform: scale(0.999);
+  cursor: pointer;
+}
