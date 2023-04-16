@@ -19,7 +19,7 @@ const Feed = () => {
 
   return (
     <section className={styles.feedContainer}>
-      <FeedSort setSort={setSort} />
+      <FeedSort currentSort={currentSort.current} setSort={setSort} />
       <Posts currentSort={currentSort.current} />
     </section>
   );

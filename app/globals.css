@@ -2,3 +2,13 @@ html,body {
   overflow-x: none;
   margin: 0;
 }
+
+.active-sort {
+  background-color: #FFA500;
+  color: white;
+}
+
+.active-sort:hover {
+  color: black;
+  background-color: white;
+}

@@ -7,6 +7,7 @@ interface AccountViewProps {
 }
 
 interface FeedSortProps {
+  currentSort: string,
   setSort: Function,
 }
 
