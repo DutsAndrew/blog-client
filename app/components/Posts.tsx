@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from 'react';
 import styles from '../page.module.css';
 import { PostProps, apiResponsePostState, Post } from "@/types/interfaces";
+import parse from 'html-react-parser';
 
 const Posts: FC<PostProps> = (props) => {
 
@@ -39,7 +40,7 @@ const Posts: FC<PostProps> = (props) => {
         });
       };
     })();
-  }, []);
+  }, [currentSort]);
 
   const handlePostViewSelection = (post: Post) => {
 
@@ -71,7 +72,9 @@ const Posts: FC<PostProps> = (props) => {
                 <strong>Title: </strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50)}
               </p>
               <p className={styles.postBodyText}>
-                <em>Body: </em>{post.body.length < 50 ? post.body : post.body.slice(0, 50)}
+                <em>Body: </em>{
+                  parse(post.body.length < 50 ? post.body : post.body.slice(0, 50))
+                }
               </p>
             </div>
             <div className={styles.postDateAndTime}>
