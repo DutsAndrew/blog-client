@@ -3,7 +3,9 @@
 import { FC, useEffect, useState } from 'react';
 import styles from '../page.module.css';
 import { PostProps, apiResponsePostState, Post } from "@/types/interfaces";
-import parse from 'html-react-parser';
+import { ViewStateProps } from '@/types/interfaces';
+import PostView from './PostView';
+import PostsView from './PostsView';
 
 const Posts: FC<PostProps> = (props) => {
 
@@ -11,6 +13,10 @@ const Posts: FC<PostProps> = (props) => {
 
   const [apiResponse, setApiResponse] = useState<apiResponsePostState>({
     message: '',
+  });
+
+  const [viewState, setViewState] = useState<ViewStateProps>({
+    current: 'posts',
   });
 
   useEffect(() => {
@@ -43,7 +49,16 @@ const Posts: FC<PostProps> = (props) => {
   }, [currentSort]);
 
   const handlePostViewSelection = (post: Post) => {
+    setViewState({
+      current: 'post',
+      post: post,
+    });
+  };
 
+  const handleReturnToPosts = () => {
+    setViewState({
+      current: 'posts',
+    });
   };
 
   if (!apiResponse.posts) {
@@ -55,40 +70,28 @@ const Posts: FC<PostProps> = (props) => {
       </p>
     </section>
    ); 
-  } else {
-    // posts found and saved in state
+  } else if (viewState.current === 'posts') {
+    // posts found and saved in state render view all
     return (
-      <section className={styles.postsContainer}>
-        {apiResponse.posts.map((post) => {
-          return <div 
-            key={post._id} 
-            className={styles.postContainer}
-            onClick={() => {
-              handlePostViewSelection(post);
-            }}
-          >
-            <div className={styles.postInformationText}>
-              <p className={styles.postTitleText}>
-                <strong>Title: </strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50)}
-              </p>
-              <p className={styles.postBodyText}>
-                <em>Body: </em>{
-                  parse(post.body.length < 50 ? post.body : post.body.slice(0, 50))
-                }
-              </p>
-            </div>
-            <div className={styles.postDateAndTime}>
-              <p className={styles.postDateText}>
-                <em>Date: </em>{post.timestamp.split('T')[0]}
-              </p>
-              <p className={styles.postTimeText}>
-                <em>Time: </em>{post.timestamp.split('T')[1].split('.')[0]}
-              </p>
-            </div>
-          </div>
-        })}
-      </section>
+      <PostsView
+        changeView={handlePostViewSelection}
+        posts={apiResponse.posts}
+      />
      );
+  } else if (viewState.current === 'post' && viewState.post) {
+    // currently viewing a post
+    return (
+      <PostView 
+        post={viewState.post}
+        returnToPosts={handleReturnToPosts}
+      />  
+    );
+  } else {
+    return (
+      <p>
+        Oops, something went terribly wrong :/
+      </p>
+    );
   };
 };
 

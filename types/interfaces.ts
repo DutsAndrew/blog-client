@@ -33,6 +33,21 @@ interface apiResponsePostState {
   posts?: Post[] | null,
 };
 
+interface ViewStateProps {
+  current: string,
+  post?: Post,
+};
+
+interface PostViewProps {
+  post: Post,
+  returnToPosts: Function,
+};
+
+interface PostsViewProps {
+  changeView: Function,
+  posts: Post[],
+};
+
 export {
   type HeaderProps,
   type AccountViewProps,
@@ -40,4 +55,7 @@ export {
   type Post,
   type PostProps,
   type apiResponsePostState,
+  type ViewStateProps,
+  type PostViewProps,
+  type PostsViewProps,
 }
