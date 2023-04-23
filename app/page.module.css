@@ -176,3 +176,29 @@
   transform: scale(0.999);
   cursor: pointer;
 }
+
+/* POST VIEW CONTAINER */
+
+.reactionContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+}
+
+.likesHeartImg {
+  max-width: 5vw;
+  filter: invert(90%) sepia(17%) saturate(230%) hue-rotate(340deg) brightness(107%) contrast(73%);
+}
+
+.likesHeartImg:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+
+  filter: invert(82%) sepia(68%) saturate(493%) hue-rotate(295deg) brightness(111%) contrast(106%);
+}
+
+.likesText {
+  font-size: 1.5em;
+}

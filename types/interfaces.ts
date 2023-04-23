@@ -28,6 +28,14 @@ interface Post {
   _id: string,
 }
 
+interface Comment {
+  author: string,
+  comment: string,
+  likes: number,
+  timestamp: string,
+  _id: string,
+};
+
 interface apiResponsePostState {
   message: string,
   posts?: Post[] | null,
@@ -48,14 +56,30 @@ interface PostsViewProps {
   posts: Post[],
 };
 
-export {
-  type HeaderProps,
-  type AccountViewProps,
-  type FeedSortProps,
-  type Post,
-  type PostProps,
-  type apiResponsePostState,
-  type ViewStateProps,
-  type PostViewProps,
-  type PostsViewProps,
+interface CommentsProps {
+  postId: string,
+};
+
+interface CommentsState {
+  message: string,
+  comments?: Comment[],
+};
+
+interface AddCommentProps {
+  postId: string,
+};
+
+export type {
+  HeaderProps,
+  AccountViewProps,
+  FeedSortProps,
+  Post,
+  PostProps,
+  apiResponsePostState,
+  ViewStateProps,
+  PostViewProps,
+  PostsViewProps,
+  CommentsProps,
+  CommentsState,
+  AddCommentProps,
 }

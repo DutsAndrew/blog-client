@@ -5,13 +5,30 @@ import Header from './components/Header'
 import Feed from './components/Feed'
 import Sidebar from './components/Sidebar';
 import AccountView from './components/AccountView';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import uniqid from 'uniqid';
 
 const Home = () => {
+
+  useEffect(() => {
+    setLocalUser();
+  }, []);
 
   const [view, setView] = useState({
     current: 'home',
   });
+
+  const [user, setUser] = useState({
+    user: '',
+  });
+
+  const setLocalUser = () => {
+    if (sessionStorage.getItem("user")) {
+      return;
+    } else {
+      sessionStorage.setItem("user", uniqid())
+    };
+  };
 
   const requestAccountView = () => {
     setView({

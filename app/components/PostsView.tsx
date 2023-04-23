@@ -9,27 +9,25 @@ const PostsView: FC<PostsViewProps> = (props): JSX.Element => {
 
   return (
     <section className={styles.postsContainer}>
-        {posts.map((post) => {
-          return <div 
-            key={post._id} 
-            className={styles.postContainer}
-            onClick={() => {
-              changeView(post);
-            }}
-          >
-            <div className={styles.postInformationText}>
-              <p className={styles.postTitleText}>
-                <strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50)}</strong>
-              </p>
-              <p className={styles.postBodyText}>
-                {
-                  parse(post.body.length < 50 ? post.body : post.body.slice(0, 50))
-                }
-              </p>
+      {posts.map((post) => {
+        return <div 
+          key={post._id} 
+          className={styles.postContainer}
+          onClick={() => {
+            changeView(post);
+          }}
+        >
+          <div className={styles.postInformationText}>
+            <p className={styles.postTitleText}>
+              <strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50)}</strong>
+            </p>
+            <div className={styles.postBodyText}>
+              {parse(post.body.length < 50 ? post.body : post.body.slice(0, 50))}
             </div>
           </div>
-        })}
-      </section>
+        </div>
+      })}
+    </section>
   );
 };
 
