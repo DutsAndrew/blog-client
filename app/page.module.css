@@ -5,8 +5,6 @@
   flex-flow: column wrap;
   width: 100vw;
   height: auto;
-  overflow-y: scroll;
-  overflow-x: none;
 }
 
 .contentContainer {
@@ -20,8 +18,8 @@
   flex-flow: column wrap;
   justify-content: flex-start;
   align-items: center;
-  max-width: 29vw;
-  min-width: 19vw;
+  max-width: 20vw;
+  min-width: 15vw;
   max-height: 95vh;
   min-height: 90vh;
   border-right: 1px solid black;
@@ -31,13 +29,13 @@
 
 .feedContainer {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
   justify-content: flex-start;
   align-items: center;
-  min-width: 69vw;
-  max-width: 79vw;
-  max-height: 95vh;
+  width: 100%;
   min-height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .sortOptions {
@@ -158,12 +156,19 @@
 
 /* POSTS COMPONENT */
 
+.postsContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 .postContainer {
   display: flex;
   flex-flow: row wrap;
-  width: 100%;
   min-height: 10vh;
-  max-height: 30vh;
+  max-height: 50vh;
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
@@ -171,8 +176,17 @@
   gap: 4vw;
 }
 
+.postInfoContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding-left: 2vw;
+}
+
 .postContainer:hover {
-  background-color: yellow;
+  background-color: #FFA500;
   transform: scale(0.999);
   cursor: pointer;
 }
@@ -195,10 +209,125 @@
 .likesHeartImg:hover {
   cursor: pointer;
   transform: scale(1.1);
-
   filter: invert(82%) sepia(68%) saturate(493%) hue-rotate(295deg) brightness(111%) contrast(106%);
 }
 
 .likesText {
   font-size: 1.5em;
+}
+
+/* COMMENTS CONTAINER */
+
+.postViewContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.returnBtn {
+  margin: 0;
+  margin-top: 2vh;
+  min-width: 15vw;
+  max-width: 30vw;
+  max-height: 5vh;
+  font-size: 1.15em;
+  border-radius: 15px;
+}
+
+.returnBtn:hover {
+  cursor: pointer;
+  background-color: #FFA500;
+}
+
+.postInformationText {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  border-top: 1px solid #FFA500;
+  border-bottom: 1px solid #FFA500;
+  margin: 0;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.reactionContainer {
+  width: 70%;
+}
+
+.commentsContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.commentsHeaderText {
+  font-size: 2em;
+  width: 92%;
+  margin: 0;
+  margin-top: 2vh;
+  margin-left: 3vw;
+  margin-bottom: 2vh;
+  border-bottom: 1px solid black;
+}
+
+.addCommentForm {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.formGroup {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 75%;
+}
+
+.formInput {
+  width: 100%;
+  min-height: 2vh;
+}
+
+.commentListContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.commentContainer {
+  max-height: 15vh;
+  width: 90%;
+}
+
+.commentLikesImg {
+  max-width: 3vh;
+  filter: invert(90%) sepia(17%) saturate(230%) hue-rotate(340deg) brightness(107%) contrast(73%);
+}
+
+.commentLikesImg:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  filter: invert(82%) sepia(68%) saturate(493%) hue-rotate(295deg) brightness(111%) contrast(106%);
+}
+
+.commentLikesContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 50%;
+  gap: 1vw;
 }

@@ -37,7 +37,7 @@ const PostView: FC<PostViewProps> = (props): JSX.Element => {
         <p 
           className={styles.likesText}
         >
-          {post.likes}
+          {post.likes} Likes
         </p>
       </div>
       <Comments 

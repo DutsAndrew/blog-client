@@ -3,6 +3,10 @@ html,body {
   margin: 0;
 }
 
+textarea {
+  resize: none;
+}
+
 .active-sort {
   background-color: #FFA500;
   color: white;

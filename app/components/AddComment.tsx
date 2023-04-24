@@ -14,12 +14,11 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
     if (commentInput && nameInput) {
       const comment = (commentInput as HTMLInputElement).value;
       const name = (nameInput as HTMLInputElement).value;
-      if (comment.length === 0 && name.length === 0) {
+      
+      if (comment.length !== 0 && name.length !== 0) {
         const sanitizedData: string[] = sanitizeCommentInputs(comment, name);
         sendDataToDB(sanitizedData);
-      } else{
-        console.log('empty');
-      }
+      };
     };
   };
 
@@ -55,6 +54,7 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
         body: processedData.toString(),
       });
       const response = await postComment.json();
+      console.log(response);
     };
   };
 
@@ -64,16 +64,19 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
       onSubmit={(e) => handleCommentSubmit(e)}
     >
       <div className={styles.formGroup}>
+        <h2 className={styles.addComentHeaderText}>
+          Add a Comment
+        </h2>
         <label htmlFor='comment'>
           *Comment:
         </label>
-        <input
+        <textarea
           className={styles.formInput}
-          type='text'
           name='comment'
           id='comment'
+          rows={4}
         >
-        </input>
+        </textarea>
       </div>
       <div className={styles.formGroup}>
         <label htmlFor='name'>

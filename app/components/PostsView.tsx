@@ -17,7 +17,7 @@ const PostsView: FC<PostsViewProps> = (props): JSX.Element => {
             changeView(post);
           }}
         >
-          <div className={styles.postInformationText}>
+          <div className={styles.postInfoContainer}>
             <p className={styles.postTitleText}>
               <strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50)}</strong>
             </p>

@@ -42,27 +42,24 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
   if (apiResponse.comments) {
     return (
       <div className={styles.commentsContainer}>
-        <p
-          className={styles.apiResponse}
-        >
-          {apiResponse.message}
-        </p>
         <AddComment 
           postId={postId}
         />
+        <h1 className={styles.commentsHeaderText}>
+          Comments
+        </h1>
         <div className={styles.commentListContainer}>
           {apiResponse.comments.map((comment) => {
             return <div
               className={styles.commentContainer}
               key={comment._id}
             >
-              <div className={styles.commentData}>
-                <p 
-                  className={styles.commentDate}
-                >
-                  {comment.author} - {comment.timestamp}
-                </p>
-              </div>
+              <p className={styles.commentData}>
+                <strong>
+                  {comment.author} &nbsp;
+                  {comment.timestamp.split('T')[0]} @ {comment.timestamp.split('T')[1].split('.')[0]}
+                </strong>
+              </p>
               <div className={styles.commentTextContainer}>
                 <p 
                   className={styles.commentText}
@@ -79,7 +76,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
                 <p 
                   className={styles.commentLikesText}
                 >
-                  {comment.likes}
+                  {comment.likes} Likes
                 </p>
               </div>
             </div>
@@ -91,11 +88,6 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
     // no comments
     return (
       <div className={styles.commentsContainer}>
-        <p 
-          className={styles.apiResponse}
-        >
-          {apiResponse.message}
-        </p>
         <AddComment 
           postId={postId}
         />
