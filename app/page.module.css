@@ -32,7 +32,8 @@
   flex-flow: column wrap;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: 75%;
+  margin: auto;
   min-height: 90vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -241,6 +242,10 @@
 .returnBtn:hover {
   cursor: pointer;
   background-color: #FFA500;
+}
+
+.viewingPostTitleText {
+  font-size: 3em;
 }
 
 .postInformationText {

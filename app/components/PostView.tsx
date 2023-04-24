@@ -8,6 +8,8 @@ const PostView: FC<PostViewProps> = (props): JSX.Element => {
 
   const { post, returnToPosts } = props;
 
+  console.log(post);
+
   return (
     <section className={styles.postViewContainer}>
       <button
@@ -17,16 +19,28 @@ const PostView: FC<PostViewProps> = (props): JSX.Element => {
         Return to Feed
       </button>
       <div className={styles.postInformationText}>
-        <p 
-          className={styles.postTitleText}
-        >
-          <strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50)}</strong>
+        <p className={styles.commentData}>
+          <strong>
+            Written By: &nbsp;
+          </strong>
+          {typeof post.author === 'object' ? `${post.author.firstName} ${post.author.lastName}` : post.author}
+          <br>
+          </br>
+          <strong>
+            On: &nbsp;
+          </strong>
+          {post.timestamp.split('T')[0]} @ {post.timestamp.split('T')[1].split('.')[0]}
         </p>
         <p 
+          className={styles.viewingPostTitleText}
+        >
+          <strong>{post.title}</strong>
+        </p>
+        <div 
           className={styles.postBodyText}
         >
-          {parse(post.body.length < 50 ? post.body : post.body.slice(0, 50))}
-        </p>
+          {parse(post.body)}
+        </div>
       </div>
       <div className={styles.reactionContainer}>
         <img 

@@ -16,7 +16,11 @@ interface PostProps {
 };
 
 interface Post {
-  author: string,
+  author: string | {
+    _id: string,
+    firstName: string,
+    lastName: string,
+  },
   body: string;
   comments: any[];
   favorites: number;
