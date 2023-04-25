@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import styles from '../page.module.css';
-import { CommentsProps, CommentsState } from '@/types/interfaces';
+import { CommentsProps, CommentsState, Comment } from '@/types/interfaces';
 import AddComment from './AddComment';
 
 const Comments: FC<CommentsProps> = (props): JSX.Element => {
@@ -39,11 +39,19 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
     };
   };
 
+  const refreshCommentList = (newComment: Comment): void => {
+    setApiResponse({
+      message: apiResponse.message,
+      comments: [...(apiResponse.comments as Comment[]), newComment],
+    });
+  };
+
   if (apiResponse.comments) {
     return (
       <div className={styles.commentsContainer}>
         <AddComment 
           postId={postId}
+          refreshCommentList={refreshCommentList}
         />
         <h1 className={styles.commentsHeaderText}>
           Comments
@@ -90,6 +98,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
       <div className={styles.commentsContainer}>
         <AddComment 
           postId={postId}
+          refreshCommentList={refreshCommentList}
         />
       </div>
     );

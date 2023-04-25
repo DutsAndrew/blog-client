@@ -71,7 +71,17 @@ interface CommentsState {
 
 interface AddCommentProps {
   postId: string,
+  refreshCommentList: Function,
 };
+
+interface Announcement {
+  text: string,
+}
+
+interface SidebarState {
+  message: string,
+  announcements?: Announcement[],
+}
 
 export type {
   HeaderProps,
@@ -83,7 +93,9 @@ export type {
   ViewStateProps,
   PostViewProps,
   PostsViewProps,
+  Comment,
   CommentsProps,
   CommentsState,
   AddCommentProps,
+  SidebarState
 }

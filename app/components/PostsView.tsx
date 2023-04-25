@@ -19,10 +19,10 @@ const PostsView: FC<PostsViewProps> = (props): JSX.Element => {
         >
           <div className={styles.postInfoContainer}>
             <p className={styles.postTitleText}>
-              <strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50)}</strong>
+              <strong>{post.title.length < 50 ? post.title : post.title.slice(0, 50) + '...'}</strong>
             </p>
             <div className={styles.postBodyText}>
-              {parse(post.body.length < 50 ? post.body : post.body.slice(0, 50))}
+              {parse(post.body.length < 500 ? post.body : post.body.slice(0, 500) + '...')}
             </div>
           </div>
         </div>

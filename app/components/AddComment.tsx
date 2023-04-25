@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
 
-  const { postId } = props;
+  const { postId, refreshCommentList } = props;
 
   const handleCommentSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -18,6 +18,8 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
       if (comment.length !== 0 && name.length !== 0) {
         const sanitizedData: string[] = sanitizeCommentInputs(comment, name);
         sendDataToDB(sanitizedData);
+      } else {
+        alert('You can only add a comment if you have a comment and name present in your submission');
       };
     };
   };
@@ -54,7 +56,13 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
         body: processedData.toString(),
       });
       const response = await postComment.json();
-      console.log(response);
+      if (response.comment) {
+        // comment posted
+        alert(`${response.message}, ${response.comment.comment}`);
+        refreshCommentList(response.comment);
+      } else {
+        alert(`${response.message}`);
+      }
     };
   };
 

@@ -68,10 +68,6 @@
   color: white;
 }
 
-/* .postsContainer {
-
-} */
-
 /* HEADER.TSX COMPONENT STYLING */
 
 .navContainer {
@@ -161,6 +157,9 @@
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
+  margin: 0;
+  margin-top: 2.5vh;
+  gap: 2.5vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -203,7 +202,7 @@
 }
 
 .likesHeartImg {
-  max-width: 5vw;
+  max-width: 4vw;
   filter: invert(90%) sepia(17%) saturate(230%) hue-rotate(340deg) brightness(107%) contrast(73%);
 }
 
@@ -224,7 +223,7 @@
   flex-flow: column wrap;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: 80%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -271,6 +270,8 @@
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  margin: 0;
+  margin-bottom: 5vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -335,4 +336,18 @@
   flex-flow: row nowrap;
   width: 50%;
   gap: 1vw;
+}
+
+.submitBtn {
+  margin: 0;
+  margin-top: 2vh;
+  max-width: 30vw;
+  min-width: 10vw;
+  border-radius: 10px;
+}
+
+.submitBtn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #FFA500;
 }
