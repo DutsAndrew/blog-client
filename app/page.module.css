@@ -351,3 +351,18 @@
   transform: scale(1.1);
   background-color: #FFA500;
 }
+
+.announcementsContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  width: 90%;
+}
+
+.announcementText {
+  margin: 0;
+  padding: 0.5vh;
+  border: 1px solid black;
+}

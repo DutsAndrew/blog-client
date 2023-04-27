@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../page.module.css';
 import { SidebarState } from '@/types/interfaces';
+import parse from 'html-react-parser';
 
 const Sidebar = () => {
 
@@ -54,10 +55,8 @@ const Sidebar = () => {
         </h2>
         <div className={styles.announcementsContainer}>
           {apiResponse.announcements.map((announcement) => {
-            return <div className={styles.announcementContainer}>
-              <p className={styles.announcementText}>
-                {announcement.text}
-              </p>
+            return <div className={styles.announcementText}>
+              {parse(announcement.announcement)}
             </div>
           })}
         </div>

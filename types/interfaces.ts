@@ -75,7 +75,7 @@ interface AddCommentProps {
 };
 
 interface Announcement {
-  text: string,
+  announcement: string,
 }
 
 interface SidebarState {
