@@ -1,5 +1,5 @@
 interface HeaderProps {
-  requestAccountView: Function,
+  cmsController: Function,
 };
 
 interface AccountViewProps {

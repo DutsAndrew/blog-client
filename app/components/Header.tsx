@@ -8,10 +8,10 @@ import { HeaderProps } from '@/types/interfaces';
 
 const Header: FC<HeaderProps> = (props) => {
 
-  const { requestAccountView } = props;
+  const { cmsController } = props;
 
-  const handleAccountRequest = () => {
-    requestAccountView();
+  const openCMS = () => {
+    cmsController();
   };
 
   return (
@@ -39,13 +39,16 @@ const Header: FC<HeaderProps> = (props) => {
       </div>
 
       <div className={styles.headerRightContainer}>
-        <button className={styles.createPostButton}>
+        <button 
+          className={styles.createPostButton}
+          onClick={() => openCMS()}
+        >
           Create Post
         </button>
         <img 
           className={styles.accountImg}
           src='/shield-account.svg'
-          onClick={() => handleAccountRequest()}>
+          onClick={() => openCMS()}>
         </img>
       </div>
     </nav>
