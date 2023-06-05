@@ -25,7 +25,7 @@
   left: 0;
   max-width: 15vw;
   min-width: 5vw;
-  height: calc(100vh);
+  min-height: calc(100vh);
   border-right: 1px solid black;
   margin: 0;
   margin-right: 1vw;
@@ -39,8 +39,7 @@
   width: 75%;
   margin: auto;
   min-height: 90vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .sortOptions {
@@ -165,7 +164,7 @@
   margin: 0;
   margin-top: 2.5vh;
   gap: 2.5vh;
-  overflow-y: scroll;
+  overflow-y: visible;
   overflow-x: hidden;
 }
 
@@ -231,7 +230,7 @@
   width: 80%;
   margin: 0;
   margin-right: 10vw;
-  overflow-y: scroll;
+  overflow-y: visible;
   overflow-x: hidden;
 }
 
@@ -279,7 +278,7 @@
   width: 100%;
   margin: 0;
   margin-bottom: 5vh;
-  overflow-y: scroll;
+  overflow-y: visible;
   overflow-x: hidden;
 }
 

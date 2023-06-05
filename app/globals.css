@@ -1,5 +1,6 @@
 html,body {
-  overflow-x: none;
+  overflow-y: visible;
+  overflow-x: hidden;
   margin: 0;
 }
 
