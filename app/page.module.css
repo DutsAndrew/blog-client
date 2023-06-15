@@ -31,6 +31,26 @@
   margin-right: 1vw;
 }
 
+.sideBarHeaderText {
+  font-size: 1.15em;
+}
+
+.announcementsContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  width: 90%;
+}
+
+.announcementText {
+  margin: 0;
+  padding: 0.25vh;
+  border: 1px solid black;
+  font-size: 1em;
+}
+
 .feedContainer {
   display: flex;
   flex-flow: column wrap;
@@ -220,8 +240,6 @@
   font-size: 1.5em;
 }
 
-/* COMMENTS CONTAINER */
-
 .postViewContainer {
   display: flex;
   flex-flow: column wrap;
@@ -232,6 +250,15 @@
   margin-right: 10vw;
   overflow-y: visible;
   overflow-x: hidden;
+}
+
+.postsTitleText {
+  font-size: 2em;
+}
+
+.postsInfoContainer {
+  padding: 2%;
+  line-height: 1.5em;
 }
 
 .returnBtn {
@@ -251,6 +278,25 @@
 
 .viewingPostTitleText {
   font-size: 3em;
+}
+
+.postBodyText {
+  line-height: 2em;
+  font-size: 1.15em;
+}
+
+.postBodyText > div {
+  background-color: #d1d1d1;
+  border-radius: 15px;
+  padding: 2%;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+.postBodyText > p strong {
+  font-size: 2em;
+  line-height: 3em;
+  border-bottom: 1px solid black;
 }
 
 .postInformationText {
@@ -278,8 +324,6 @@
   width: 100%;
   margin: 0;
   margin-bottom: 5vh;
-  overflow-y: visible;
-  overflow-x: hidden;
 }
 
 .commentsHeaderText {
@@ -298,6 +342,8 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  font-size: 1.15em;
+  gap: 1.5vh;
 }
 
 .formGroup {
@@ -324,6 +370,7 @@
 .commentContainer {
   max-height: 15vh;
   width: 90%;
+  font-size: 1.15em;
 }
 
 .commentLikesImg {
@@ -356,19 +403,4 @@
   cursor: pointer;
   transform: scale(1.1);
   background-color: #FFA500;
-}
-
-.announcementsContainer {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 2vh;
-  width: 90%;
-}
-
-.announcementText {
-  margin: 0;
-  padding: 0.5vh;
-  border: 1px solid black;
 }
