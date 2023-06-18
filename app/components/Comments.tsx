@@ -17,7 +17,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
   }, []);
 
   const fetchComments = async () => {
-    const url = `http://localhost:8080/api/post/${postId}/comments`;
+    const url = `https://avd-blog-api.fly.dev/api/post/${postId}/comments`;
     const comments = await fetch(url, {
       method: 'GET',
       headers: {

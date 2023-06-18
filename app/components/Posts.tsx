@@ -21,7 +21,7 @@ const Posts: FC<PostProps> = (props) => {
 
   useEffect(() => {
     (async function retrievePosts() {
-      const url = `http://localhost:8080/api/posts/${currentSort}`;
+      const url = `https://avd-blog-api.fly.dev/api/posts/${currentSort}`;
       const fetchPosts = await fetch(url, {
         headers: {
           'Accept': 'application/json',

@@ -17,7 +17,7 @@ const Sidebar = () => {
   }, []);
 
   const fetchAnnouncements = async () => {
-    const url = 'http://localhost:8080/api/announcements';
+    const url = 'https://avd-blog-api.fly.dev/api/announcements';
     const retrieveAnnouncements = await fetch(url, {
       method: 'GET',
       headers: {
