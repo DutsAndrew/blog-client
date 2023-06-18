@@ -9,3 +9,5 @@ The corresponding applications that run in conjunction with the client can be fo
 
 1. Blog-API - for handling requests to and from the database
 2. Blog-CMS - for authenticating users to perform CRUD (create, read, update, and delete) operations in the database
+
+You can visit the Blog Client by following this URL: https://blog-client-fpqul8x9w-dutsandrew.vercel.app/
