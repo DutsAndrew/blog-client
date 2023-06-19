@@ -3,15 +3,11 @@
 import styles from '../page.module.css';
 import Icon from '@mdi/react';
 import { mdiPyramid } from '@mdi/js';
-import { FC } from 'react';
-import { HeaderProps } from '@/types/interfaces';
 
-const Header: FC<HeaderProps> = (props) => {
-
-  const { cmsController } = props;
+const Header = () => {
 
   const openCMS = () => {
-    cmsController();
+    window.open("https://dutsandrew-blog-cms.vercel.app/", "_blank");
   };
 
   return (

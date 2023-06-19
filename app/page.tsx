@@ -21,13 +21,9 @@ const Home = () => {
     };
   };
 
-  const openContentManagementSystemTab = () => {
-    window.open("", "_blank");
-  };
-
   return (
     <main className={styles.main}>
-      <Header cmsController={openContentManagementSystemTab} />
+      <Header />
       <div className={styles.contentContainer}>
         <Sidebar />
         <Feed />

@@ -1,7 +1,3 @@
-interface HeaderProps {
-  cmsController: Function,
-};
-
 interface AccountViewProps {
   returnToHomePage: Function,
 }
@@ -84,7 +80,6 @@ interface SidebarState {
 }
 
 export type {
-  HeaderProps,
   AccountViewProps,
   FeedSortProps,
   Post,
