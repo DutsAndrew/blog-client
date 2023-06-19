@@ -4,7 +4,7 @@ import styles from './page.module.css'
 import Header from './components/Header'
 import Feed from './components/Feed'
 import Sidebar from './components/Sidebar';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import uniqid from 'uniqid';
 
 const Home = () => {
@@ -13,11 +13,23 @@ const Home = () => {
     setLocalUser();
   }, []);
 
+  const isIncognito = () => {
+    const storage = window.navigator.storage;
+    const storageEstimate = storage.estimate();
+    return storage && (storageEstimate as unknown as number) === 0;
+  };
+
   const setLocalUser = () => {
-    if (sessionStorage.getItem("user")) {
-      return;
-    } else {
-      sessionStorage.setItem("user", uniqid())
+    if (typeof window !== "undefined") {
+      if (isIncognito()) {
+        alert("You are browsing in incognito mode and will be unable to like posts or create comments. If you would like to participate in these futures please deactivate incognito mode");
+      } else {
+        if (sessionStorage.getItem("user")) {
+          return;
+        } else {
+          sessionStorage.setItem("user", uniqid())
+        };
+      };
     };
   };
 

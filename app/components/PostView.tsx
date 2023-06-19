@@ -8,7 +8,16 @@ const PostView: FC<PostViewProps> = (props): JSX.Element => {
 
   const { post, returnToPosts } = props;
 
-  console.log(post);
+  const handlePostLike = () => {
+    if (typeof window !== "undefined") {
+      if (window.sessionStorage.getItem("token")) {
+        const apiURL = `https://avd-blog-api.fly.dev/api/post/${post._id}/like`;
+        
+      } else {
+        alert("You are browsing in incognito mode, please deactivate to engage with this future");
+      };
+    };
+  };
 
   return (
     <section className={styles.postViewContainer}>
@@ -46,6 +55,7 @@ const PostView: FC<PostViewProps> = (props): JSX.Element => {
         <img 
           src="/heart.svg"
           className={styles.likesHeartImg}
+          onClick={() => handlePostLike()}
           >
         </img>
         <p 
