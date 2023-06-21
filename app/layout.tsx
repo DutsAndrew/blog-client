@@ -14,6 +14,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Blog Client</title>
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body>{children}</body>
     </html>
