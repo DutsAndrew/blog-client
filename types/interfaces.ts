@@ -1,11 +1,11 @@
 interface AccountViewProps {
   returnToHomePage: Function,
-}
+};
 
 interface FeedSortProps {
   currentSort: string,
   setSort: Function,
-}
+};
 
 interface PostProps {
   currentSort: string,
@@ -38,7 +38,7 @@ interface Comment {
 
 interface apiResponsePostState {
   message: string,
-  posts?: Post[] | null,
+  posts?: Post[],
 };
 
 interface ViewStateProps {
@@ -49,6 +49,7 @@ interface ViewStateProps {
 interface PostViewProps {
   post: Post,
   returnToPosts: Function,
+  postReactionChange: Function,
 };
 
 interface PostsViewProps {
@@ -72,12 +73,17 @@ interface AddCommentProps {
 
 interface Announcement {
   announcement: string,
-}
+};
 
 interface SidebarState {
   message: string,
   announcements?: Announcement[],
-}
+};
+
+enum LikeType {
+  LIKE,
+  UNLIKE,
+};
 
 export type {
   AccountViewProps,
@@ -92,5 +98,9 @@ export type {
   CommentsProps,
   CommentsState,
   AddCommentProps,
-  SidebarState
+  SidebarState,
 }
+
+export {
+  LikeType,
+};

@@ -1,4 +1,4 @@
-import { PostViewProps } from "@/types/interfaces";
+import { LikeType, PostViewProps } from "@/types/interfaces";
 import { FC } from "react";
 import styles from '../page.module.css';
 import parse from 'html-react-parser';
@@ -6,13 +6,73 @@ import Comments from "./Comments";
 
 const PostView: FC<PostViewProps> = (props): JSX.Element => {
 
-  const { post, returnToPosts } = props;
+  const { post, returnToPosts, postReactionChange } = props;
 
-  const handlePostLike = () => {
+  const handlePostReaction = () => {
     if (typeof window !== "undefined") {
-      if (window.sessionStorage.getItem("token")) {
-        const apiURL = `https://avd-blog-api.fly.dev/api/post/${post._id}/like`;
-        
+      const user = window.localStorage.getItem("user");
+      if (user) {
+        if (post.whoLiked.includes(user)) {
+          handlePostToUnlike();
+          return;
+        } else {
+          handlePostLike();
+          return;
+        };
+      } else {
+        alert("You are unable to interact with posts while incognito browsing");
+      };
+    };
+  };
+
+  const handlePostLike = async () => {
+    if (typeof window !== "undefined") {
+      if (window.localStorage.getItem("user")) {
+        const user = window.localStorage.getItem("user");
+        const apiURL = `https://avd-blog-api.fly.dev/api/post/${post._id}/like/${user}`;
+        try {
+          const uploadLike = await fetch(apiURL, {
+            method: 'PUT',
+            headers: {
+              'Accept': 'application/json',
+            },
+          });
+          const response = await uploadLike.json();
+          alert(response.message);
+          if (response.status === true) {
+            // like successful
+            postReactionChange(LikeType.LIKE, post._id);
+          };
+        } catch(error) {
+          alert("We were unable to like that post for you, please try again later");
+        };
+      } else {
+        alert("You are browsing in incognito mode, please deactivate to engage with this future");
+      };
+    };
+  };
+
+  const handlePostToUnlike = async () => {
+    if (typeof window !== "undefined") {
+      if (window.localStorage.getItem("user")) {
+        const user = window.localStorage.getItem("user");
+        const apiURL = `https://avd-blog-api.fly.dev/api/post/${post._id}/unlike/${user}`;
+        try {
+          const uploadLike = await fetch(apiURL, {
+            method: 'PUT',
+            headers: {
+              'Accept': 'application/json',
+            },
+          });
+          const response = await uploadLike.json();
+          alert(response.message);
+          if (response.status === true) {
+            // unlike successful
+            postReactionChange(LikeType.UNLIKE, post._id);
+          };
+        } catch(error) {
+          alert("We were unable to like that post for you, please try again later");
+        };
       } else {
         alert("You are browsing in incognito mode, please deactivate to engage with this future");
       };
@@ -55,7 +115,7 @@ const PostView: FC<PostViewProps> = (props): JSX.Element => {
         <img 
           src="/heart.svg"
           className={styles.likesHeartImg}
-          onClick={() => handlePostLike()}
+          onClick={() => handlePostReaction()}
           >
         </img>
         <p 

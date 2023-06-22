@@ -24,10 +24,10 @@ const Home = () => {
       if (isIncognito()) {
         alert("You are browsing in incognito mode and will be unable to like posts or create comments. If you would like to participate in these futures please deactivate incognito mode");
       } else {
-        if (sessionStorage.getItem("user")) {
+        if (window.localStorage.getItem("user")) {
           return;
         } else {
-          sessionStorage.setItem("user", uniqid())
+          window.localStorage.setItem("user", uniqid())
         };
       };
     };

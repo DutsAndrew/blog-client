@@ -35,34 +35,36 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
   };
 
   const sendDataToDB = async (data: string[]): Promise<void> => {
-    const currentUser = sessionStorage.getItem("user");
-    if (!currentUser) {
-      alert('You are currently browsing without a token, please exit private/incognito browsing to add a comment');
-    } else {
-      const comment = data[0],
-          name = data[1],
-          processedData = new URLSearchParams();
-
-          processedData.append('comment', comment);
-          processedData.append('name', name);
-
-      const url = `https://avd-blog-api.fly.dev/api/post/${postId}/comment/create`;
-      const postComment = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: processedData.toString(),
-      });
-      const response = await postComment.json();
-      if (response.comment) {
-        // comment posted
-        alert(`${response.message}, ${response.comment.comment}`);
-        refreshCommentList(response.comment);
+    if (typeof window !== "undefined") {
+      const currentUser = window.localStorage.getItem("user");
+      if (!currentUser) {
+        alert('You are currently browsing without a token, please exit private/incognito browsing to add a comment');
       } else {
-        alert(`${response.message}`);
-      }
+        const comment = data[0],
+            name = data[1],
+            processedData = new URLSearchParams();
+
+            processedData.append('comment', comment);
+            processedData.append('name', name);
+
+        const url = `https://avd-blog-api.fly.dev/api/post/${postId}/comment/create`;
+        const postComment = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: processedData.toString(),
+        });
+        const response = await postComment.json();
+        if (response.comment) {
+          // comment posted
+          alert(`${response.message}, ${response.comment.comment}`);
+          refreshCommentList(response.comment);
+        } else {
+          alert(`${response.message}`);
+        }
+      };
     };
   };
 
