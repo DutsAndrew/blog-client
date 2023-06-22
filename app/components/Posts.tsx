@@ -73,6 +73,7 @@ const Posts: FC<PostProps> = (props) => {
               const posts: Post[] = apiResponse.posts || [];
               if (reactionType === LikeType.LIKE) {
                 post.whoLiked.push(user);
+                post.likes += 1;
                 setApiResponse({
                   message: apiResponse.message,
                   posts: [...posts, post]
@@ -80,6 +81,7 @@ const Posts: FC<PostProps> = (props) => {
                 return;
               } else if (reactionType === LikeType.UNLIKE) {
                 post.whoLiked.splice(post.whoLiked.indexOf(user), 1);
+                post.likes -= 1;
                 setApiResponse({
                   message: apiResponse.message,
                   posts: [...posts, post]
