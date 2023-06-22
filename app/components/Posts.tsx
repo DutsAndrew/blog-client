@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, use, useEffect, useState } from 'react';
 import styles from '../page.module.css';
 import { PostProps, apiResponsePostState, Post, LikeType } from "@/types/interfaces";
 import { ViewStateProps } from '@/types/interfaces';
@@ -49,6 +49,10 @@ const Posts: FC<PostProps> = (props) => {
     })();
   }, [currentSort]);
 
+  useEffect(() => {
+    // handles updates to the Posts[]
+  }, [apiResponse]);
+
   const handlePostViewSelection = (post: Post) => {
     setViewState({
       current: 'post',
@@ -67,32 +71,32 @@ const Posts: FC<PostProps> = (props) => {
       const user = window.localStorage.getItem("user");
       if (user) {
         if (apiResponse.posts) {
-          apiResponse.posts.forEach((post: Post) => {
-            if (post._id === postID) {
-              // post found
-              const posts: Post[] = apiResponse.posts || [];
-              if (reactionType === LikeType.LIKE) {
-                post.whoLiked.push(user);
-                post.likes += 1;
-                setApiResponse({
-                  message: apiResponse.message,
-                  posts: [...posts, post]
-                });
-                return;
-              } else if (reactionType === LikeType.UNLIKE) {
-                post.whoLiked.splice(post.whoLiked.indexOf(user), 1);
-                post.likes -= 1;
-                setApiResponse({
-                  message: apiResponse.message,
-                  posts: [...posts, post]
-                });
-                return;
-              } else {
-                return;
-              };
-            }
+          const identifiedPost = apiResponse.posts.find((post: Post) => {
+            return post._id === postID;
           });
-        }
+          if (typeof identifiedPost !== "undefined") {
+            const posts: Post[] = apiResponse.posts || [];
+            if (reactionType === LikeType.LIKE) {
+              identifiedPost.whoLiked.push(user);
+              identifiedPost.likes++;
+              setApiResponse({
+                message: apiResponse.message,
+                posts: [...posts, identifiedPost]
+              });
+              return;
+            } else if (reactionType === LikeType.UNLIKE) {
+              identifiedPost.whoLiked.splice(identifiedPost.whoLiked.indexOf(user), 1);
+              identifiedPost.likes--;
+              setApiResponse({
+                message: apiResponse.message,
+                posts: [...posts, identifiedPost]
+              });
+              return;
+            } else {
+              return;
+            };
+          };
+        };
       } else {
         return;
       };
