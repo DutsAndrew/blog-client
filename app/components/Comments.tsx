@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useEffect, useState } from 'react';
 import styles from '../page.module.css';
 import { CommentsProps, CommentsState, Comment } from '@/types/interfaces';
@@ -72,9 +74,11 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
       },
     });
     const response = await addLike.json();
-    if (response.status === 200) {
-      alert("Comment updated");
-      updateCommentList(response.comment);
+    const updatedComment = response.comment;
+    if (updatedComment) {
+      updateCommentList(comment, updatedComment);
+      alert("Comment liked");
+      return;
     } else {
       alert(`${response.message}`);
     };
@@ -89,18 +93,20 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
       },
     });
     const response = await addLike.json();
-    if (response.status === 200) {
-      alert("Comment updated");
-      updateCommentList(response.comment);
+    const updatedComment = response.comment;
+    if (updatedComment) {
+      updateCommentList(comment, updatedComment);
+      alert("Comment unliked");
+      return;
     } else {
       alert(`${response.message}`);
     };
   };
 
-  const updateCommentList = (newComment: Comment): void => {
+  const updateCommentList = (oldComment: Comment, newComment: Comment): void => {
     const currentComments = apiResponse.comments;
     if (currentComments) {
-      currentComments.splice(currentComments.indexOf(newComment), 1, newComment);
+      currentComments.splice(currentComments.indexOf(oldComment), 1, newComment);
       setApiResponse({
         message: apiResponse.message,
         comments: currentComments,
