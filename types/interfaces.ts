@@ -33,6 +33,8 @@ interface Comment {
   comment: string,
   likes: number,
   timestamp: string,
+  user: string,
+  whoLiked: string[],
   _id: string,
 };
 

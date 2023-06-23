@@ -9,7 +9,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
 
   const [apiResponse, setApiResponse] = useState<CommentsState>({
     message: '',
-    // optional state of comments
+    // comments {optional}
   });
 
   useEffect(() => {
@@ -46,6 +46,70 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
     });
   };
 
+  const handleCommentReaction = (comment: Comment): void => {
+    if (typeof window !== "undefined") {
+      const user = window.localStorage.getItem("user");
+      if (user) {
+        if (comment.whoLiked.includes((user as string))) {
+          handleCommentUnlike(comment, user);
+        } else {
+          handleCommentLike(comment, user);
+        };
+      } else {
+        return;
+      };
+    } else {
+      return;
+    };
+  };
+
+  const handleCommentLike = async (comment: Comment, user: string): Promise<void> => {
+    const apiURL = `https://avd-blog-api.fly.dev/api/comment/${comment._id}/like/${user}`;
+    const addLike = await fetch(apiURL, {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+    const response = await addLike.json();
+    if (response.status === 200) {
+      alert("Comment updated");
+      updateCommentList(response.comment);
+    } else {
+      alert(`${response.message}`);
+    };
+  };
+
+  const handleCommentUnlike = async (comment: Comment, user: string): Promise<void> => {
+    const apiURL = `https://avd-blog-api.fly.dev/api/comment/${comment._id}/unlike/${user}`;
+    const addLike = await fetch(apiURL, {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+    const response = await addLike.json();
+    if (response.status === 200) {
+      alert("Comment updated");
+      updateCommentList(response.comment);
+    } else {
+      alert(`${response.message}`);
+    };
+  };
+
+  const updateCommentList = (newComment: Comment): void => {
+    const currentComments = apiResponse.comments;
+    if (currentComments) {
+      currentComments.splice(currentComments.indexOf(newComment), 1, newComment);
+      setApiResponse({
+        message: apiResponse.message,
+        comments: currentComments,
+      });
+    } else {
+      return;
+    };
+  };
+
   if (apiResponse.comments) {
     return (
       <div className={styles.commentsContainer}>
@@ -79,6 +143,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
                 <img 
                   src='/heart.svg'
                   className={styles.commentLikesImg}
+                  onClick={() => handleCommentReaction(comment)}
                   >
                 </img>
                 <p 

@@ -47,7 +47,7 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
             processedData.append('comment', comment);
             processedData.append('name', name);
 
-        const url = `https://avd-blog-api.fly.dev/api/post/${postId}/comment/create`;
+        const url = `https://avd-blog-api.fly.dev/api/post/${postId}/comment/create/${currentUser}`;
         const postComment = await fetch(url, {
           method: 'POST',
           headers: {
