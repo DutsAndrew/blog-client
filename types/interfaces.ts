@@ -25,6 +25,7 @@ interface Post {
   timestamp: string;
   title: string;
   whoLiked: string[];
+  views: number;
   _id: string,
 }
 
@@ -52,6 +53,7 @@ interface PostViewProps {
   post: Post,
   returnToPosts: Function,
   postReactionChange: Function,
+  incrementLocalPostViewAmount: Function,
 };
 
 interface PostsViewProps {

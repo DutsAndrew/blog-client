@@ -66,6 +66,21 @@ const Posts: FC<PostProps> = (props) => {
     });
   };
 
+  const incrementLocalPostViewAmount = (postID: string): void => {
+    const currentPosts = apiResponse.posts;
+    if (currentPosts) {
+      currentPosts.forEach((post) => {
+        if (post._id === postID) {
+          post.views++;
+        };
+      });
+      setApiResponse({
+        message: apiResponse.message,
+        posts: currentPosts,
+      });
+    };
+  };
+
   const handlePostReactionChange = (reactionType: LikeType, postID: string): void => {
     if (typeof window !== "undefined") {
       const user = window.localStorage.getItem("user");
@@ -127,6 +142,7 @@ const Posts: FC<PostProps> = (props) => {
         post={viewState.post}
         returnToPosts={handleReturnToPosts}
         postReactionChange={handlePostReactionChange}
+        incrementLocalPostViewAmount={incrementLocalPostViewAmount}
       />  
     );
   } else {

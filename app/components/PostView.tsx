@@ -1,12 +1,38 @@
+'use client';
+
 import { LikeType, PostViewProps } from "@/types/interfaces";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import styles from '../page.module.css';
 import parse from 'html-react-parser';
 import Comments from "./Comments";
 
 const PostView: FC<PostViewProps> = (props): JSX.Element => {
 
-  const { post, returnToPosts, postReactionChange } = props;
+  const { post, returnToPosts, postReactionChange, incrementLocalPostViewAmount } = props;
+
+  useEffect(() => {
+    incrementPostView();
+  }, []);
+
+  const incrementPostView = async () => {
+    if (typeof window !== "undefined") {
+      const apiURL = `https://avd-blog-api.fly.dev/api/post/${post._id}/view`;
+      try {
+        const uploadView = await fetch(apiURL, {
+          method: "PUT",
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
+        const response = await uploadView.json();
+        if (response) {
+          incrementLocalPostViewAmount(post._id);
+        };
+      } catch(error) {
+        return;
+      };
+    };
+  };
 
   const handlePostReaction = () => {
     if (typeof window !== "undefined") {
