@@ -75,6 +75,7 @@ interface AddCommentProps {
 
 interface Announcement {
   announcement: string,
+  _id: string,
 };
 
 interface SidebarState {

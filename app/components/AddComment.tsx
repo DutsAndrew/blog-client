@@ -1,22 +1,35 @@
+'use client';
+
 import styles from '../page.module.css';
 import Filter from 'bad-words';
 import { AddCommentProps } from '@/types/interfaces';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
 
   const { postId, refreshCommentList } = props;
 
+  const [submittedComment, setSubmittedComment] = useState({
+    name: "",
+    comment: "",
+  });
+
+  useEffect(() => {
+    // force rerender to display previous comment on bad API return
+  }, [submittedComment]);
+
   const handleCommentSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     const commentInput = document.querySelector('#comment');
     const nameInput = document.querySelector('#name');
+
     if (commentInput && nameInput) {
-      const comment = (commentInput as HTMLInputElement).value;
+      const comment = (commentInput as HTMLTextAreaElement).value;
       const name = (nameInput as HTMLInputElement).value;
-      
+
       if (comment.length !== 0 && name.length !== 0) {
         const sanitizedData: string[] = sanitizeCommentInputs(comment, name);
+        clearForm();
         sendDataToDB(sanitizedData);
       } else {
         alert('You can only add a comment if you have a comment and name present in your submission');
@@ -59,12 +72,27 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
         const response = await postComment.json();
         if (response.comment) {
           // comment posted
-          alert(`${response.message}, ${response.comment.comment}`);
+          alert(`${response.message}`);
           refreshCommentList(response.comment);
         } else {
+          console.log("handling error");
           alert(`${response.message}`);
+          setSubmittedComment({
+            comment: response.comment,
+            name: response.name,
+          });
         }
       };
+    };
+  };
+
+  const clearForm = () => {
+    const commentTextArea = document.querySelector("#comment");
+    const nameInput = document.querySelector("#name");
+
+    if (commentTextArea && nameInput) {
+      (commentTextArea as HTMLInputElement).value = "";
+      (nameInput as HTMLInputElement).value = "";
     };
   };
 
@@ -85,6 +113,7 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
           name='comment'
           id='comment'
           rows={4}
+          defaultValue={submittedComment.comment.length > 0 ? `${submittedComment.comment}` : ""}
         >
         </textarea>
       </div>
@@ -97,6 +126,7 @@ const AddComment: FC<AddCommentProps> = (props): JSX.Element => {
           type='text'
           name='name'
           id='name'
+          defaultValue={submittedComment.name.length > 0 ? `${submittedComment.name}` : ""}
         >
         </input>
       </div>

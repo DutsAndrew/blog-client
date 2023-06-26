@@ -55,7 +55,7 @@ const Sidebar = () => {
         </h2>
         <div className={styles.announcementsContainer}>
           {apiResponse.announcements.map((announcement) => {
-            return <div className={styles.announcementText}>
+            return <div className={styles.announcementText} key={announcement._id}>
               {parse(announcement.announcement)}
             </div>
           })}
