@@ -40,7 +40,7 @@ const Home = () => {
     };
   };
 
-  const handleUserQueryResults = (queryResults: queryResult, status: boolean) => {
+  const handleUserQueryResults = (queryResults: queryResult) => {
     setUserQuery({
       posts: queryResults.posts,
       message: queryResults.message,

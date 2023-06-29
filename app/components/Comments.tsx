@@ -147,7 +147,7 @@ const Comments: FC<CommentsProps> = (props): JSX.Element => {
               </div>
               <div className={styles.commentLikesContainer}>
                 <img 
-                  src='/heart.svg'
+                  src={'/heart.svg'}
                   className={styles.commentLikesImg}
                   onClick={() => handleCommentReaction(comment)}
                   >

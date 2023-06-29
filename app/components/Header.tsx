@@ -39,7 +39,7 @@ const Header: FC<HeaderProps> = (props): JSX.Element => {
       const results = await fetchQuery.json();
       if (results.posts) {
         clearSearchBar();
-        handleUserQueryResults(results, true);
+        handleUserQueryResults(results);
       } else if (results.error) {
         alert(`${results.message}, ${results.error}`);
       } else {
