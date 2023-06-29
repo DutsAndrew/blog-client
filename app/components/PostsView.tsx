@@ -74,13 +74,19 @@ const PostsView: FC<PostsViewProps> = (props): JSX.Element => {
             </div>
             <div className={styles.postsReactionContainer}>
               <div className={styles.postsLikesContainer}>
-                <img className={styles.postsLikesImage} src='/hearts.svg'></img>
+                <img 
+                  className={styles.postsLikesImage}
+                  src={'/hearts.svg'}>
+                </img>
                 <p className={styles.postsLikesText}>
                   {post.likes}
                 </p>
               </div>
               <div className={styles.postsViewsContainer}>
-                <img className={styles.postsViewsImage} src='/views.svg'></img>
+                <img 
+                  className={styles.postsViewsImage}
+                  src={'/views.svg'}>
+                </img>
                 <p className={styles.postsViewsText}>
                   {post.views}
                 </p>
