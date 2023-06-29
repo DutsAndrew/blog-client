@@ -1,5 +1,13 @@
+interface HeaderProps {
+  handleUserQueryResults: Function,
+}
+
 interface AccountViewProps {
   returnToHomePage: Function,
+};
+
+interface FeedProps {
+  userQuery: queryResult,
 };
 
 interface FeedSortProps {
@@ -7,8 +15,9 @@ interface FeedSortProps {
   setSort: Function,
 };
 
-interface PostProps {
+interface PostsProps {
   currentSort: string,
+  userQuery: queryResult,
 };
 
 interface Post {
@@ -59,6 +68,8 @@ interface PostViewProps {
 interface PostsViewProps {
   changeView: Function,
   posts: Post[],
+  query: boolean,
+  stopQuery: Function,
 };
 
 interface CommentsProps {
@@ -90,11 +101,19 @@ enum LikeType {
   UNLIKE,
 };
 
+type queryResult = {
+  message: string,
+  posts?: Post[],
+  renderNeeded: boolean,
+}
+
 export type {
+  HeaderProps,
+  FeedProps,
   AccountViewProps,
   FeedSortProps,
   Post,
-  PostProps,
+  PostsProps,
   apiResponsePostState,
   ViewStateProps,
   PostViewProps,
@@ -104,6 +123,7 @@ export type {
   CommentsState,
   AddCommentProps,
   SidebarState,
+  queryResult,
 }
 
 export {

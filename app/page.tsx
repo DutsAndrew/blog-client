@@ -4,10 +4,17 @@ import styles from './page.module.css'
 import Header from './components/Header'
 import Feed from './components/Feed'
 import Sidebar from './components/Sidebar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import uniqid from 'uniqid';
+import { queryResult } from '@/types/interfaces';
 
 const Home = () => {
+
+  const [userQuery, setUserQuery] = useState<queryResult>({
+    message: "",
+    posts: [],
+    renderNeeded: false,
+  });
 
   useEffect(() => {
     setLocalUser();
@@ -33,12 +40,20 @@ const Home = () => {
     };
   };
 
+  const handleUserQueryResults = (queryResults: queryResult, status: boolean) => {
+    setUserQuery({
+      posts: queryResults.posts,
+      message: queryResults.message,
+      renderNeeded: true,
+    });
+  };
+
   return (
     <main className={styles.main}>
-      <Header />
+      <Header handleUserQueryResults={handleUserQueryResults} />
       <div className={styles.contentContainer}>
         <Sidebar />
-        <Feed />
+        <Feed userQuery={userQuery} />
       </div>
     </main>
   );

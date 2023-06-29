@@ -1,15 +1,15 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, use, useEffect, useState } from 'react';
 import styles from '../page.module.css';
-import { PostProps, apiResponsePostState, Post, LikeType } from "@/types/interfaces";
+import { PostsProps, apiResponsePostState, Post, LikeType, queryResult } from "@/types/interfaces";
 import { ViewStateProps } from '@/types/interfaces';
 import PostView from './PostView';
 import PostsView from './PostsView';
 
-const Posts: FC<PostProps> = (props) => {
+const Posts: FC<PostsProps> = (props) => {
 
-  const { currentSort } = props;
+  const { currentSort, userQuery } = props;
 
   const [apiResponse, setApiResponse] = useState<apiResponsePostState>({
     message: '',
@@ -21,37 +21,44 @@ const Posts: FC<PostProps> = (props) => {
   });
 
   useEffect(() => {
-    (async function retrievePosts() {
-      const url = `https://avd-blog-api.fly.dev/api/posts/${currentSort}`;
-      const fetchPosts = await fetch(url, {
-        headers: {
-          'Accept': 'application/json',
-        },
-        method: 'GET',
-      });
-      const response = await fetchPosts.json();
-      if (response.status === 400) {
-        setApiResponse({
-          message: "No posts found",
-        });
-      };
-      if (response.posts) {
-        // there were posts retrieved
-        setApiResponse({
-          message: response.message,
-          posts: response.posts,
-        });
-      } else {
-        setApiResponse({
-          message: response.message,
-        });
-      };
-    })();
+    retrievePosts();
   }, [currentSort]);
 
   useEffect(() => {
-    // handles updates to the Posts[]
-  }, [apiResponse]);
+    // this prevents loading query view on initial load and every rerender
+    if (userQuery.renderNeeded === true) {
+      setViewState({
+        current: "query",
+      });
+    };
+  }, [userQuery]);
+
+  async function retrievePosts() {
+    const url = `https://avd-blog-api.fly.dev/api/posts/${currentSort}`;
+    const fetchPosts = await fetch(url, {
+      headers: {
+        'Accept': 'application/json',
+      },
+      method: 'GET',
+    });
+    const response = await fetchPosts.json();
+    if (response.status === 400) {
+      setApiResponse({
+        message: "No posts found",
+      });
+    };
+    if (response.posts) {
+      // there were posts retrieved
+      setApiResponse({
+        message: response.message,
+        posts: response.posts,
+      });
+    } else {
+      setApiResponse({
+        message: response.message,
+      });
+    };
+  }
 
   const handlePostViewSelection = (post: Post) => {
     setViewState({
@@ -118,6 +125,12 @@ const Posts: FC<PostProps> = (props) => {
     };
   };
 
+  const handleStopQueryView = () => {
+    setViewState({
+      current: 'posts',
+    });
+  };
+
   if (!apiResponse.posts) {
    // no posts found
    return (
@@ -127,12 +140,23 @@ const Posts: FC<PostProps> = (props) => {
       </p>
     </section>
    ); 
+  } else if (viewState.current === "query") {
+    return (
+      <PostsView
+        changeView={handlePostViewSelection}
+        posts={userQuery.posts ? userQuery.posts : []}
+        query={true}
+        stopQuery={handleStopQueryView}
+      />
+     );
   } else if (viewState.current === 'posts') {
     // posts found and saved in state render view all
     return (
       <PostsView
         changeView={handlePostViewSelection}
         posts={apiResponse.posts}
+        query={false}
+        stopQuery={handleStopQueryView}
       />
      );
   } else if (viewState.current === 'post' && viewState.post) {

@@ -185,12 +185,32 @@
 .postsContainer {
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   width: 100%;
   margin: 0;
   margin-top: 2.5vh;
+  margin-bottom: 2.5vh;
   gap: 2.5vh;
   overflow-y: visible;
   overflow-x: hidden;
+}
+
+.stopQueryViewButton {
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0.5vh;
+  font-size: 1.25em;
+  border-radius: 15px;
+  background-color: #FFA500;
+}
+
+.queryResultsHeader {
+  font-size: 2em;
+}
+
+.stopQueryViewButton:hover {
+  cursor: pointer;
 }
 
 .postContainer {
@@ -198,7 +218,7 @@
   flex-flow: column wrap;
   min-height: 10vh;
   max-height: 50vh;
-  width: 100%;
+  width: 99%;
   justify-content: space-between;
   align-items: flex-start;
   border: 1px solid black;
