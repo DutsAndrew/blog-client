@@ -96,6 +96,10 @@ interface SidebarState {
   announcements?: Announcement[],
 };
 
+interface JumpButtonProps {
+  handleJumpButtonClick: Function,
+}
+
 enum LikeType {
   LIKE,
   UNLIKE,
@@ -124,6 +128,7 @@ export type {
   AddCommentProps,
   SidebarState,
   queryResult,
+  JumpButtonProps,
 }
 
 export {
